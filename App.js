@@ -10,7 +10,7 @@ export default class App extends React.Component {
     super(props)
     this.state = {
         sessionToken: '',
-        manageUser: false
+        
     }
   }
   
@@ -31,29 +31,7 @@ export default class App extends React.Component {
     Expo.SecureStore.deleteItemAsync('token')
   }
 
-  modifyProfileImage = (imgUrl) => {
-    this.setState({
-      profileImage: imgUrl,
-      manageUser: false
-    });
-    Expo.SecureStore.setItemAsync('profileImage', imgUrl);
-  }
-
-  manageUserProfile = () => {
-    this.setState({manageUser: true})
-  }
-
-  changeToWorkouts = () => {
-    this.setState({manageUser: false})
-  }
-
   protectedViews = () => {
-    if (this.state.manageUser) {
-      return (
-        // <Settings openWorkouts={this.setState({manageUser: false})} token={this.state.sessionToken} />
-        <Settings addImage={this.modifyProfileImage} token={this.state.sessionToken} />
-      )
-    }
 
     if (this.state.sessionToken == null || this.state.sessionToken == '') {      
       return (
